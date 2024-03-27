@@ -1,0 +1,55 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+}
+
+:root {
+  --primary_color: #99CDA9;
+  --primary_text: #294B29;
+}
+
+.form-with-lable lable {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+  color: var(--primary_text);
+  font-size: 14px;
+}
+
+.form-with-lable .input-box {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.form-with-lable .input-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: var(--primary_text);
+}
+
+.form-with-button button {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: var(--primary_color);
+  color: var(--primary_text);
+  transition: all 0.5s;
+}
+
+.form-with-button button:hover {
+  background-color: #86c296;
+}
+
+.is_error {
+  font-size: 14px;
+  color: crimson;
+}
