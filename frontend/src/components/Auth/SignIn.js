@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import "./Auth.css";
 
@@ -64,6 +65,7 @@ const SignIn = () => {
               <button className="">Sign In</button>
             </div>
           </form>
+          <span className="block w-full text-center mt-3">Don't have an Acccount? <Link to={'/sign-up'} className="text-blue-900 underline">Sign UP</Link></span>
         </div>
       </div>
     </div>

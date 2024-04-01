@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 const SignUp = () => {
@@ -16,7 +17,7 @@ const SignUp = () => {
       email: Yup.string()
         .required("Email is required.")
         .matches(
-          "^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$",
+          "^([a-zA-Z0-9_.$#-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$",
           "Invalid email address."
         ),
       password: Yup.string()
@@ -84,6 +85,12 @@ const SignUp = () => {
             </div>
           </form>
         </div>
+        <span className="block w-full text-center mt-3">
+          Already Have an Acccount?&nbsp;
+          <Link to={"/"} className="text-blue-900 underline">
+            Sign In
+          </Link>
+        </span>
       </div>
     </div>
   );
