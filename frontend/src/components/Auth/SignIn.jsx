@@ -1,23 +1,21 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import axios from 'axios';
+import { Link, useNavigate  } from "react-router-dom";
 import * as Yup from "yup";
+import "./Auth.css";
 
-const SignUp = () => {
+const SignIn = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      full_name: "",
       email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      full_name: Yup.string()
-        .max(15, "Must be 15 characters or less")
-        .required("Full Name is required.")
-        .matches("^[a-zA-Z ]*$", "Invalid string."),
       email: Yup.string()
         .required("Email is required.")
         .matches(
-          "^([a-zA-Z0-9_.$#-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$",
+          "^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$",
           "Invalid email address."
         ),
       password: Yup.string()
@@ -25,38 +23,33 @@ const SignUp = () => {
         .min(6, "Must be 6 characters or Grater.")
         .required("Password is required."),
     }),
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      await axios
+        .post(`${process.env.REACT_APP_LOCAL_URL}sign-in`, values)
+        .then((response) => {
+          if(response.status === 200) {
+            localStorage.setItem(process.env.REACT_APP_SECRET_KEY, response.data.data.authentication);
+            navigate('/dashboard');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   });
   return (
     <div className="authentication-wrapper">
       <div className="authentication-box">
         <div className="authentication-form-box">
-          <p className="authentication-title">Admin Sign Up</p>
+          <p className="authentication-title">Admin Sign In</p>
           <form method="post" autoComplete="off" onSubmit={formik.handleSubmit}>
-            <div className="form-with-lable mb-5">
-              <lable>Full Name</lable>
-              <div className="input-box">
-                <input
-                  type="text"
-                  name="full_name"
-                  placeholder="Enter Full Name"
-                  onChange={formik.handleChange}
-                  value={formik.values.full_name}
-                />
-              </div>
-              {formik.touched.full_name && formik.errors.full_name ? (
-                <div className="is_error">{formik.errors.full_name}</div>
-              ) : null}
-            </div>
             <div className="form-with-lable mb-5">
               <lable>Email</lable>
               <div className="input-box">
                 <input
                   type="text"
                   name="email"
-                  placeholder="Enter Email"
+                  placeholder="Enter email"
                   onChange={formik.handleChange}
                   value={formik.values.email}
                 />
@@ -71,7 +64,7 @@ const SignUp = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="Enter Password"
+                  placeholder="Enter password"
                   onChange={formik.handleChange}
                   value={formik.values.password}
                 />
@@ -81,19 +74,19 @@ const SignUp = () => {
               ) : null}
             </div>
             <div className="form-with-button text-center">
-              <button type="submit">Sign Up</button>
+              <button className="">Sign In</button>
             </div>
           </form>
+          <span className="block w-full text-center mt-3">
+            Don't have an Acccount?{" "}
+            <Link to={"/sign-up"} className="text-blue-900 underline">
+              Sign UP
+            </Link>
+          </span>
         </div>
-        <span className="block w-full text-center mt-3">
-          Already Have an Acccount?&nbsp;
-          <Link to={"/"} className="text-blue-900 underline">
-            Sign In
-          </Link>
-        </span>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;

@@ -1,6 +1,6 @@
 import express from "express";
-var router = express.Router();
-import { signUp } from "@controllers/auth";
+const router = express.Router();
+import { signUp, signIn } from "@controllers/auth";
 
 /* GET home page. */
 router.get("/", function (req: any, res: any, next: any) {
@@ -8,5 +8,7 @@ router.get("/", function (req: any, res: any, next: any) {
 });
 
 router.post("/sign-up", signUp);
+router.post("/sign-in", signIn);
+
 let indexRouter = router;
-export { indexRouter };
+export {indexRouter};

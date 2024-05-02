@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css';
 
+import Layout from "./Layout/index";
 // Components
-import SignUp from './components/Auth/SignUp';
-import SignIn from './components/Auth/SignIn';
-import Dashboard from './components/Dashboard';
+import SignUp from './Components/Auth/SignUp';
+import SignIn from './Components/Auth/SignIn';
+import Dashboard from './Components/Dashboard';
 // Components ---- End
 
 const router = createBrowserRouter([
@@ -23,11 +25,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <Layout><Dashboard /></Layout>,
   },
 ]);
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));  
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />

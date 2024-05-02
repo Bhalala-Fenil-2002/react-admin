@@ -1,22 +1,28 @@
 import createError from "http-errors";
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import http from "http";
-
+import dotenv from "dotenv";
 import { indexRouter } from "@routes/index";
 import { usersRouter } from "@routes/users";
+import "@config/init";
+// import "@config/async";
+import "@helpers/associations";
 
-require("@config/init");
-require('@config/async');
-// require("@helpers/associations");
+dotenv.config();
 
-require("dotenv").config();
-var cors = require("cors");
+const app = express();
+const cors = require("cors");
 
-var app = express();
-app.use(cors());
+const corsOpts = {
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+};
+
+app.use(cors(corsOpts));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -28,20 +34,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/admin/", indexRouter);
+app.use("/users/", usersRouter);
 
-app.get("/api/test/", function (req, res) {
+app.get("/admin/test/", function (req: Request, res: Response) {
   res.send("Test is done.");
 });
 
 // catch 404 and forward to error handler
-app.use(function (req: any, res: any, next: any) {
+app.use(function (req: Request, res: Response, next: NextFunction) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err: any, req: any, res: any, next: any) {
+app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -52,9 +58,9 @@ app.use(function (err: any, req: any, res: any, next: any) {
 });
 
 const server = http.createServer(app);
-const port = process.env.PORT;
+const port: string | number | undefined = process.env.PORT || 3000;
 server.listen(port, () => {
   console.log(`Server is running on Port: ${port}`);
 });
 
-server.timeout = 1000;
+server.timeout = 9000;

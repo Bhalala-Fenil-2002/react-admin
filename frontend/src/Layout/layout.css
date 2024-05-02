@@ -1,0 +1,38 @@
+
+/* SideBar */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #d3c3ff;
+    padding: 0;
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    top: 0;
+}
+
+/* NavBar */
+
+.navbar {
+    width: calc(100% - 250px);
+    height: 75px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+    position: -webkit-sticky;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    padding: 0;
+    right: 0;
+}
+
+/* Wrapper */
+
+.container_wrapper {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+    background-color: var(--background-color);
+    top: 75px;
+    bottom: 0;
+    margin-top: 75px;
+}

@@ -5,48 +5,56 @@
 
 * {
   margin: 0;
-  padding: 0;
-  
+  padding: 0;  
   font-family: "Poppins", sans-serif;
   font-style: normal;
+  box-sizing: border-box;
 }
 
 :root {
-  --primary_color: #99CDA9;
-  --primary_text: #294B29;
+  --theme_primary: #702bff;
+  --theme_secondary: #7d4dff;
+  --theme_text: #27076e;
+  --theme_white: #ebe7ff;
+
+  --btn_bg: #784bff;
+  --btn_hover_bg: #702bff;
+
+  --theme-border: #4311a1;
 }
 
 .form-with-lable lable {
   display: block;
   width: 100%;
   margin-bottom: 4px;
-  color: var(--primary_text);
+  color: var(--theme_text);
   font-size: 14px;
 }
 
-.form-with-lable .input-box {
+.form-with-lable .input-box input {
   padding: 10px;
-  background-color: #fff;
+  background-color: var(--theme_white);
   border-radius: 8px;
+  border: 2px solid var(--theme_primary);
+  width: 100%;
+  outline: none;
+  color: var(--theme_text);
 }
 
-.form-with-lable .input-box input {
-  width: 100%;
-  border: none;
-  outline: none;
-  color: var(--primary_text);
+.form-with-lable .input-box input:focus {
+  border: 2px solid var(--theme-border);
 }
 
 .form-with-button button {
   padding: 10px 12px;
   border-radius: 8px;
-  background-color: var(--primary_color);
-  color: var(--primary_text);
+  background-color: var(--btn_bg);
+  color: var(--theme_white);
   transition: all 0.5s;
 }
 
 .form-with-button button:hover {
-  background-color: #86c296;
+  background-color: var(--btn_hover_bg);
 }
 
 .is_error {
