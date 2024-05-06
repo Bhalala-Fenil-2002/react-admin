@@ -53,6 +53,11 @@
   color: var(--theme_text);
 }
 
+.auth-footer-head {
+  font-size: 14px;
+  font-weight: 500;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

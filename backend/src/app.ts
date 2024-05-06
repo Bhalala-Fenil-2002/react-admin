@@ -7,9 +7,12 @@ import http from "http";
 import dotenv from "dotenv";
 import { indexRouter } from "@routes/index";
 import { usersRouter } from "@routes/users";
+
 import "@config/init";
 // import "@config/async";
 import "@helpers/associations";
+
+import User from "@models/User";
 
 dotenv.config();
 
@@ -59,7 +62,17 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 
 const server = http.createServer(app);
 const port: string | number | undefined = process.env.PORT || 3000;
-server.listen(port, () => {
+server.listen(port, async () => {
+  let Admin = await User.findOne({
+    raw:true
+  });
+  if(Admin === null) {
+    await User.create({
+      "fullname": "adminer",
+      "email": "admin@gmail.com",
+      "password": "admin@123",
+    });    
+  }  
   console.log(`Server is running on Port: ${port}`);
 });
 

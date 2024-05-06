@@ -12,14 +12,23 @@
 }
 
 :root {
-  --theme_primary: #7d4dff;
-  --theme_secondary: #d3c3f6;
-  --theme_text: #27076e;
-  --theme_white: #ebe7ff;
+  --primary-100:#8B5FBF;
+  --primary-200:#61398F;
+  --primary-300:#FFFFFF;
+  
+  --accent-100:#D6C6E1;
+  --accent-200:#9A73B5;
+  
+  --text-100:#4A4A4A;
+  --text-200:#878787;
 
-  --btn_bg: #784bff;
-  --btn_hover_bg: #702bff;
+  --bg-100:#F5F3F7;
+  --bg-200:#E9E4ED;
+  --bg-300:#FFFFFF;
+}
 
+.theme_txt {
+  color: var(--theme_text);
 }
 
 .form-with-lable lable {
@@ -28,6 +37,7 @@
   margin-bottom: 4px;
   color: var(--theme_text);
   font-size: 14px;
+  font-weight: 500;
 }
 
 .form-with-lable .input-box input {
@@ -38,10 +48,13 @@
   width: 100%;
   outline: none;
   color: var(--theme_text);
+  font-size: 14px;
 }
 
 .form-with-lable .input-box input::placeholder {
   color: #3d3d3d;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .form-with-lable .input-box input:focus {

@@ -17,11 +17,13 @@ const SignIn = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
   const initialValues = {
     email: "",
     password: "",
   };
-  const validationSchema = {
+
+  const validationSchema = Yup.object({
     email: Yup.string()
       .required("Email is required.")
       .matches(
@@ -32,14 +34,9 @@ const SignIn = () => {
       .max(16, "Must be 16 characters or less.")
       .min(6, "Must be 6 characters or Grater.")
       .required("Password is required."),
-  };
-  const {
-    values,
-    errors,
-    touched,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
+  });
+
+  const { values, errors, touched, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
@@ -59,6 +56,7 @@ const SignIn = () => {
         });
     },
   });
+
   return (
     <div className="authentication-wrapper">
       <div className="authentication-left">
@@ -67,11 +65,7 @@ const SignIn = () => {
             <div className="admin-icons">
               <img src={AdminIcons} alt="admin icons" />
             </div>
-            <form
-              method="post"
-              autoComplete="off"
-              onSubmit={handleSubmit}
-            >
+            <form method="post" autoComplete="off" onSubmit={handleSubmit}>
               <div className="form-with-lable mb-5">
                 <lable>Email</lable>
                 <div className="input-box">
@@ -106,9 +100,9 @@ const SignIn = () => {
                 <button className="">Sign In</button>
               </div>
             </form>
-            <span className="block w-full text-center mt-3">
+            <span className="auth-footer-head block w-full text-center text-black mt-3">
               Don't have an Acccount?{" "}
-              <Link to={"/sign-up"} className="underline">
+              <Link to={"/sign-up"} className="underline theme_txt">
                 Sign UP
               </Link>
             </span>
