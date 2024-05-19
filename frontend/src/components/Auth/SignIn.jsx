@@ -3,20 +3,12 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "./Auth.css";
-import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 import LoginAnimation from "../../assets/admin_animation_on_auth.json";
 import AdminIcons from "../../assets/admin_icons.png";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: LoginAnimation,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
 
   const initialValues = {
     email: "",
@@ -62,12 +54,19 @@ const SignIn = () => {
       <div className="authentication-left">
         <div className="authentication-box">
           <div className="authentication-form-box">
-            <div className="admin-icons">
+            <div className="admin-icons text-center">
               <img src={AdminIcons} alt="admin icons" />
             </div>
-            <form method="post" autoComplete="off" onSubmit={handleSubmit}>
-              <div className="form-with-lable mb-5">
-                <lable>Email</lable>
+            <form
+              method="post"
+              autoComplete="off"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <div className="form-with-lable mb-3">
+                <lable className="theme_txt">Email</lable>
                 <div className="input-box">
                   <input
                     type="text"
@@ -81,8 +80,8 @@ const SignIn = () => {
                   <div className="is_error">{errors.email}</div>
                 ) : null}
               </div>
-              <div className="form-with-lable mb-5">
-                <lable>Password</lable>
+              <div className="form-with-lable mb-3">
+                <lable className="theme_txt">Password</lable>
                 <div className="input-box">
                   <input
                     type="password"
@@ -97,12 +96,14 @@ const SignIn = () => {
                 ) : null}
               </div>
               <div className="form-with-button text-center">
-                <button className="">Sign In</button>
+                <button type="submit" className="theme_btn">
+                  Sign In
+                </button>
               </div>
             </form>
-            <span className="auth-footer-head block w-full text-center text-black mt-3">
+            <span className="auth-footer-head d-block text-center mt-3">
               Don't have an Acccount?{" "}
-              <Link to={"/sign-up"} className="underline theme_txt">
+              <Link to={"/sign-up"} className="underline theme_txt ">
                 Sign UP
               </Link>
             </span>
@@ -111,7 +112,8 @@ const SignIn = () => {
       </div>
       <div className="authentication-right">
         <div className="authentication-animation">
-          <Lottie options={defaultOptions} height={800} width={800} />
+          {/* <Lottie options={defaultOptions} height={800} width={800} /> */}
+          <Lottie animationData={LoginAnimation} loop={true} />
         </div>
       </div>
     </div>

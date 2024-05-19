@@ -1,4 +1,3 @@
-
 .authentication-wrapper {
   width: 100%;
   display: flex;
@@ -21,12 +20,13 @@
 }
 
 .authentication-right {
-  width: 60%;
+  width: 50%;
   height: 100vh;
   position: relative;
 }
 
 .authentication-right .authentication-animation {
+  width: 100%;
   mix-blend-mode: multiply;
   position: absolute;
   top: 50%;
@@ -54,18 +54,5 @@
 }
 
 .auth-footer-head {
-  font-size: 14px;
   font-weight: 500;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
