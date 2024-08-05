@@ -10,5 +10,5 @@ router.get("/", function (req: any, res: any, next: any) {
 router.post("/sign-up", signUp);
 router.post("/sign-in", signIn);
 
-let indexRouter = router;
-export {indexRouter};
+let adminRouter = router;
+export { adminRouter };

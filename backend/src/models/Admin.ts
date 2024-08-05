@@ -2,23 +2,23 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '@config/init';
 
-interface UserAttributes {
+interface AdminAttributes {
   id: number;
   fullname: string;
   email: string;
   password: string;
+  is_superadmin: number;
 }
 
-// interface UserCreationAttributes extends Omit<UserAttributes, 'id'> {}
-
-class User extends Model<UserAttributes> implements UserAttributes {
+class Admin extends Model<AdminAttributes> implements AdminAttributes {
   public id!: number;
   public fullname!: string;
   public email!: string;
   public password!: string;
+  public is_superadmin!: number;
 }
 
-User.init(
+Admin.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -41,11 +41,14 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    is_superadmin: {
+      type: DataTypes.INTEGER
+    }
   },
   {
     sequelize,
-    modelName: 'User',
+    modelName: 'Admin',
   }
 );
 
-export default User;
+export default Admin;

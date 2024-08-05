@@ -5,14 +5,15 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import http from "http";
 import dotenv from "dotenv";
-import { indexRouter } from "@routes/index";
+import bcrypt from "bcrypt";
+import { adminRouter } from "@routes/admin";
 import { usersRouter } from "@routes/users";
 
 import "@config/init";
 // import "@config/async";
 import "@helpers/associations";
 
-import User from "@models/User";
+import AdminModel from "@models/Admin";
 
 dotenv.config();
 
@@ -37,11 +38,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/admin/", indexRouter);
+app.use("/admin/", adminRouter);
 app.use("/users/", usersRouter);
 
 app.get("/admin/test/", function (req: Request, res: Response) {
-  res.send("Test is done.");
+  res.send("admin is done.");
 });
 
 // catch 404 and forward to error handler
@@ -63,14 +64,23 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 const server = http.createServer(app);
 const port: string | number | undefined = process.env.PORT || 3000;
 server.listen(port, async () => {
-  let Admin = await User.findOne({
+  let username = "phonewin@gmail.com";
+  let password = "phonewin@123";
+  const hash = bcrypt.hashSync(password, 10);
+
+  let adminUser = await AdminModel.findOne({
+    where: {
+      email: username
+    },
     raw:true
   });
-  if(Admin === null) {
-    await User.create({
+
+  if(adminUser === null) {
+    await AdminModel.create({
       "fullname": "adminer",
-      "email": "admin@gmail.com",
-      "password": "admin@123",
+      "email": username,
+      "password": hash,
+      "is_superadmin": 1
     });    
   }  
   console.log(`Server is running on Port: ${port}`);
